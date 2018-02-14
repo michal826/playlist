@@ -16,13 +16,13 @@
 //****************** SERIOUSLY TEST USING console.log()!!! ******************
 
 // Songs
-var mySong = {
+var mySong = [{
 	title: "Crown",
 	artist: "Camila Cabello  Grey",
 	song_Url: "https://open.spotify.com/album/3QB2VHZ40qHxyTHSEzqthX",
 	image_Url: "https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
 }
-
+]
 var myPlayList = [{
 		title: "24K Magic",
 		artist: "Bruno Mars",
@@ -48,6 +48,12 @@ var myPlayList = [{
 
 // DOCUMENT READY FUNCTION
 $(document).ready(function() {
+
+	$('body').append("<p>Title: " + mySong.title + "</p>");
+	$('body').append("<p>Artist: " + mySong.artist + "</p>");
+	$('body').append("<p>MP3: " + mySong.mp3url + "</p>");
+	$('body').append("<img src='" + mySong.imageurl + "'>");
+
 	$(".add").click(function() {
 
 		newSong();
@@ -55,40 +61,83 @@ $(document).ready(function() {
 
 	});
 
+	function showSongs() {
+		for (var i = 0; i < myPlayList.length; i = i + 1) {
+			console.log(myPlayList[i]);
+			$(".songs").append('<p>' + myPlayList[i].title + '<p>');
+			$(".songs").append('<p>' + myPlayList[i].artist + '<p>');
+			$(".songs").append('<p>' + myPlayList[i].mp3_url + '<p>');
+			$(".songs").append('<p>' + 'src' +  myPlayList[i].image_url + '<p>') ;
+		}
+	}
+
+
+
+	function newSong() {
+		var title = $('#title').val();
+		var artist = $('#name').val();
+		var length = $('#length').val();
+		var releaseDate = $('#date').val();
+		var mp3Url = $('#mp3').val();
+		var imageUrl = $('#image').val();
+		var addSong = {
+			"title": title,
+			"artist": artist,
+			"length": length,
+			"releaseDate": releaseDate,
+			"mp3Url": mp3Url,
+			"imageUrl": imageUrl,
+			"genres": [
+				$('#titleInput').val()
+			]
+		}
+		myPlayList.push(newSong);
+		console.log(newSong);
+	}
+	$(".add").click(function() {
+		newSong();
+		showSongs(myPlayList)
+	});
+
+	showSongs();
 });
 console.log(myPlayList);
 
-function showSongs() {
-	for (var i = 0; i < myPlayList.length; i = i + 1) {
-		console.log(myPlayList[i]);
-		$(".songs").append(myPlayList[i].title);
-	}
-}
+// function showSongs() {
+// 	for (var i = 0; i < myPlayList.length; i = i + 1) {
+// 		console.log(myPlayList[i]);
+// 		$(".songs").append(myPlayList[i].title);
+// 		$(".songs").append(myPlayList[i].artist);
+// 		$(".songs").append(myPlayList[i].mp3_url);
+// 		$(".songs").append(myPlayList[i].image_url);
+// 	}
+// }
 
 
 
-function newSong() {
-	var title = $('#title').val();
-	var artist = $('#name').val();
-	var length = $('#length').val();
-	var releaseDate = $('#date').val();
-	var mp3Url = $('#mp3').val();
-	var imageUrl = $('#image').val();
-	var newSong = {
-		"title": title,
-		"artist": artist,
-		"length": length,
-		"releaseDate": releaseDate,
-		"mp3Url": mp3Url,
-		"imageUrl": imageUrl,
-		"genres": [
-			$('#titleInput').val()
-		]
-	}
-	myPlayList.push(newSong);
-	console.log(newSong);
-}
+// function newSong() {
+// 	var title = $('#title').val();
+// 	var artist = $('#name').val();
+// 	var length = $('#length').val();
+// 	var releaseDate = $('#date').val();
+// 	var mp3Url = $('#mp3').val();
+// 	var imageUrl = $('#image').val();
+// 	var newSong = {
+// 		"title": title,
+// 		"artist": artist,
+// 		"length": length,
+// 		"releaseDate": releaseDate,
+// 		"mp3Url": mp3Url,
+// 		"imageUrl": imageUrl,
+// 		"genres": [
+// 			$('#titleInput').val()
+// 		]
+// 	}
+// 	myPlayList.push(newSong);
+// 	console.log(newSong);
+// }
 
-function clearList() {
-	$('#list').empty();
-}
+// function clearList() {
+// 	$('#list').empty();
+// }
+// showSongs();
